@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://112.74.41.97:3306/gz-day001?serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  #mvc:
+   # pathmatch:
+      #use-suffix-pattern的作用是将http://ip/getall.json的链接同http://ip/getall等价，配置完后会在匹配servlet时将.xx自动忽略
+    #  use-suffix-pattern: false
+      #默认为false，同use-suffix-pattern作用一致，但仅支持第二步注册过的后缀，这样更安全
+     # use-registered-suffix-pattern: true
+    #contentnegotiation:
+      #是否应使用URL路径中的路径扩展来确定所请求的媒体类型
+     # favor-path-extension: true

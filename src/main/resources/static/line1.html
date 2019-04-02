@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Echarts---基于ajax技术柱状图</title>
+    <script src="echarts.common.min.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+<div id="mybox" style="height: 400px;width: 400px;"></div>
+<script>
+
+    var mychart=echarts.init(document.getElementById('mybox'));
+    //配置图表，初始化图表框架
+    mychart.setOption({
+        title:{
+            text:'学生成绩柱状图'
+        },
+        tooltip:{
+
+        },
+        legend:{
+            data:["成绩"]
+        },
+        xAxis:{
+            data:[]
+        },
+        yAxis:{
+
+        },
+        series:[{
+            name:'成绩',
+            type:'line',
+            data:[]
+        }]
+    });
+    //显示数据加载提示框
+    mychart.showLoading();
+
+    //发出ajax请求，获取数据
+//定义2个数组，存储姓名、成绩
+    var names=[];
+    var scores=[];
+$.ajax({
+    type:"post",
+    url:"getall",
+    data:{},
+    dataType:"json",
+    success:function (response) {
+        if(response){
+            //遍历json数组
+            for(var i=0;i<response.length;i++){
+                names.push(response[i].name);
+                scores.push(response[i].score);
+            }
+            //隐藏加载动画
+            mychart.hideLoading();
+            //把ajax从服务器端获取到的数据设置给Echarts图表对象
+            mychart.setOption({
+                xAxis:{
+                    data:names
+                },
+                series:[{
+                    name:'成绩',
+                    type:'line',
+                    data:scores
+                }]
+            })
+        }
+    }
+})
+</script>
+</body>
+</html>
