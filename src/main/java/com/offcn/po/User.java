@@ -11,6 +11,7 @@ import java.util.Date;
  * @Modified By：
  */
 public class User {
+    //id
     private Long id;
     private String name;
     private Double score;
